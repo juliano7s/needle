@@ -1,8 +1,6 @@
 package com.creationguts.needle.dao;
 
-import com.creationguts.needle.dao.mysql.MySqlBaseDaoImpl;
 import com.creationguts.needle.dao.mysql.MySqlDaoFactory;
-import com.sun.xml.internal.rngom.parse.host.Base;
 
 /**
  * Created by Juliano on 10/2/16.

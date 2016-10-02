@@ -17,7 +17,7 @@ public class MySqlDaoFactory extends DaoFactory{
     private static String[] testParameters = { "localhost", "needle_test", "root", "root" };
     private static String[] prodParameters = { "localhost", "needle", "root", "root" };
 
-    private Connection connection;
+    private String connectionUrl;
 
     public enum DB {
         TEST,
@@ -25,13 +25,12 @@ public class MySqlDaoFactory extends DaoFactory{
     }
 
     public MySqlDaoFactory(DB db) throws Exception {
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection(getJdbcUrl(db));
+        this.connectionUrl = getJdbcUrl(db);
     }
 
     @Override
     public ClientDao createClientDao() throws Exception {
-        return new MySqlClientDaoImpl(connection);
+        return new MySqlClientDaoImpl(connectionUrl);
     }
 
     private static String getJdbcUrl(DB db) {

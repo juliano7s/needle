@@ -4,6 +4,7 @@ import com.creationguts.needle.dao.BaseDao;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  * Base class for MySQL dao implementations
@@ -15,5 +16,10 @@ public abstract class MySqlBaseDaoImpl {
 
     public MySqlBaseDaoImpl(String connectionUrl) {
         this.connectionUrl = connectionUrl;
+    }
+
+    public Connection getConnection() throws Exception {
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        return DriverManager.getConnection(this.connectionUrl);
     }
 }

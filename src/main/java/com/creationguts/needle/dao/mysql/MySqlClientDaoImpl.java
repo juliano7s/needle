@@ -4,7 +4,6 @@ import com.creationguts.needle.dao.ClientDao;
 import com.creationguts.needle.exception.DataException;
 import com.creationguts.needle.model.Client;
 
-import java.sql.Connection;
 import java.util.Collection;
 
 /**
@@ -13,8 +12,8 @@ import java.util.Collection;
  */
 public class MySqlClientDaoImpl extends MySqlBaseDaoImpl implements ClientDao {
 
-    public MySqlClientDaoImpl(Connection connection) {
-        super(connection);
+    public MySqlClientDaoImpl(String connectionUrl) {
+        super(connectionUrl);
     }
 
     @Override
