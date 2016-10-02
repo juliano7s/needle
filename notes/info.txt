@@ -1,0 +1,19 @@
+
+
+
+Model:
+    Clients
+        name
+        cpf
+        telephones
+        addresses
+
+    Orders
+        client          --the one who requested the order
+        worker          --the one to work on the order
+        description
+        status: pending, working, ready, delivered
+        addedDate
+        deliveryDate
+        scheduledDeliveryDate
+        readyDate
