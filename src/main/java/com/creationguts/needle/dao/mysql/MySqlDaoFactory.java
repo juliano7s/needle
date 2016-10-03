@@ -2,6 +2,7 @@ package com.creationguts.needle.dao.mysql;
 
 import com.creationguts.needle.dao.ClientDao;
 import com.creationguts.needle.dao.DaoFactory;
+import com.creationguts.needle.dao.TestDbCreateDao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +13,7 @@ import java.sql.DriverManager;
  */
 public class MySqlDaoFactory extends DaoFactory{
 
-    private static final String baseUrl = "jdbc:mysql://%s/%s?user=%s&password=%s";
+    private static final String baseUrl = "jdbc:mysql://%s/%s?useSSL=false&user=%s&password=%s";
 
     private static String[] testParameters = { "localhost", "needle_test", "root", "root" };
     private static String[] prodParameters = { "localhost", "needle", "root", "root" };
@@ -31,6 +32,11 @@ public class MySqlDaoFactory extends DaoFactory{
     @Override
     public ClientDao createClientDao() throws Exception {
         return new MySqlClientDaoImpl(connectionUrl);
+    }
+
+    @Override
+    public TestDbCreateDao createTestDbCreateDao() throws Exception {
+        return new MySqlTestDbCreateDao(connectionUrl);
     }
 
     private static String getJdbcUrl(DB db) {

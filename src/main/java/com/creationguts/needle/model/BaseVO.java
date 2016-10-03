@@ -1,22 +1,24 @@
 package com.creationguts.needle.model;
 
+import java.io.Serializable;
+
 /**
  * Base class for value objects
  * Created by Juliano on 10/1/16.
  */
-public abstract class BaseVO {
+public abstract class BaseVO<T extends Serializable> {
 
-    public BaseVO(long id) {
+    public BaseVO(T id) {
         setId(id);
     }
 
-    public long getId() {
+    public T getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(T id) {
         this.id = id;
     }
 
-    private long id;
+    private T id;
 }

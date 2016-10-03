@@ -3,6 +3,7 @@ package com.creationguts.needle.dao;
 import com.creationguts.needle.dao.mysql.MySqlDaoFactory;
 
 /**
+ * Base factory for daos
  * Created by Juliano on 10/2/16.
  */
 public abstract class DaoFactory {
@@ -16,5 +17,7 @@ public abstract class DaoFactory {
     }
 
     public abstract ClientDao createClientDao() throws Exception;
+
+    public abstract TestDbCreateDao createTestDbCreateDao() throws Exception;
 
 }
