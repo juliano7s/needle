@@ -78,6 +78,7 @@ public class MockClientDao implements ClientDao {
     }
 
     private static Collection<Client> initClients() {
+/*
         Client[] clients = new Client[5];
         clients[0] = new Client(1, FIND_BY_NAME_EXACT_MATCH, "00000000000");
         clients[1] = new Client(2, "Elizabeth Windsor", "11111111111");
@@ -85,6 +86,10 @@ public class MockClientDao implements ClientDao {
         clients[3] = new Client(4, "Luciana Genro", "33333333333");
         clients[4] = new Client(5, "Dilma Roussef", "44444444444");
 
+
+
         return Arrays.stream(clients).collect(Collectors.toList());
+*/
+        return null;
     }
 }

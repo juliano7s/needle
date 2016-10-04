@@ -1,13 +1,9 @@
 package com.creationguts.needle.dao.mysql;
 
 import com.creationguts.needle.dao.TestDbCreateDao;
-import com.creationguts.needle.model.Client;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.Arrays;
 
 /**
  * Dao to initialize test database
@@ -18,19 +14,16 @@ public class MySqlTestDbCreateDao extends MySqlBaseDaoImpl implements TestDbCrea
     private static final String CLIENT_TABLE = "client";
     private static final String ORDER_TABLE = "order";
     private static final String[] TABLES = { CLIENT_TABLE, ORDER_TABLE };
-    protected static final List<Client> CLIENT_DATA = new ArrayList<>();
-
-    {
-        CLIENT_DATA.add(new Client("12312312312","ANA BUT", null));
-        CLIENT_DATA.add(new Client("09876543211","Paulo Hübbe","paulo@hotmail.com"));
-        CLIENT_DATA.add(new Client("13524678900","Fabrizia Faulhaber","ff@gmail.com"));
-        CLIENT_DATA.add(new Client(null,"Jorge Has", null));
-        CLIENT_DATA.add(new Client("11122233344","Ana Laura Belmonte","flaura@me.com"));
-        CLIENT_DATA.add(new Client(null,"Adriana Cruz","adri@facebook.com.br "));
-        CLIENT_DATA.add(new Client("99988877766","Marli Weber", null));
-        CLIENT_DATA.add(new Client(null,"12345678900","Lisandra", null));
-    }
-
+    private static final String[][] clientData = {
+        { "12312312312","ANA BUT", null },
+        { "09876543211","Paulo Hübbe","paulo@hotmail.com" },
+        { "13524678900","Fabrizia Faulhaber","ff@gmail.com" },
+        { null,"Jorge Has", null },
+        { "11122233344","Ana Laura Belmonte","flaura@me.com" },
+        { null,"Adriana Cruz","adri@facebook.com.br " },
+        { "99988877766","Marli Weber", null },
+        { null,"12345678900","Lisandra", null }
+    };
 
     public MySqlTestDbCreateDao(String connectionUrl) {
         super(connectionUrl);
@@ -74,19 +67,23 @@ public class MySqlTestDbCreateDao extends MySqlBaseDaoImpl implements TestDbCrea
     }
 
     private void insertTableData() {
-        String insertClientData = "INSERT INTO `" + CLIENT_TABLE + "` " +
-                "VALUES (null,'12312312312','ANA BUT',NULL)," +
-                "       (null,'12345678900','Lisandra',NULL)," +
-                "       (null,'09876543211','Paulo Hübbe','paulo@hotmail.com')," +
-                "       (null,'13524678900','Fabrizia Faulhaber','ff@gmail.com')," +
-                "       (null,null,'Jorge Has',NULL)," +
-                "       (null,11122233344,'Ana Laura Belmonte','flaura@me.com')," +
-                "       (null,null,'Adriana Cruz','adri@facebook.com.br ')," +
-                "       (null,99988877766,'Marli Weber',NULL)";
+        String insertQuery = "INSERT INTO `%s` VALUES (?, ?, ?, ?)";
 
-        try (Connection connection = DriverManager.getConnection(this.connectionUrl);
-             Statement statement = connection.createStatement()) {
-            statement.execute(insertClientData);
+        try (Connection connection = DriverManager.getConnection(this.connectionUrl)) {
+            Arrays.stream(clientData)
+                    .forEach(a -> {
+                        StringBuilder query = new StringBuilder(String.format(insertQuery, CLIENT_TABLE));
+                        try(PreparedStatement statement = connection.prepareStatement(query.toString())) {
+                            statement.setNull(1, Types.INTEGER);
+                            statement.setString(2, a[0]);
+                            statement.setString(3, a[1]);
+                            statement.setString(4, a[2]);
+                            statement.execute();
+                            System.out.println(statement.toString());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    });
         } catch (Exception e) {
             e.printStackTrace();
         }
