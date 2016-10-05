@@ -1,10 +1,10 @@
 package com.creationguts.needle.model;
 
 /**
- * Order Status enum
+ * Request Status enum
  * Created by Juliano on 10/1/16.
  */
-public enum OrderStatus {
+public enum RequestStatus {
     PENDING,
     WORKING,
     READY,

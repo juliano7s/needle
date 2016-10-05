@@ -2,18 +2,25 @@
 
 
 Model:
-    Clients
+    Client
         name
         cpf
         telephones
         addresses
 
-    Orders
-        client          --the one who requested the order
-        worker          --the one to work on the order
+    Request
+        client          --the one who requested the request
+        worker          --the one to work on the request
         description
         status: pending, working, ready, delivered
         addedDate
         deliveryDate
         scheduledDeliveryDate
         readyDate
+        price
+        cost
+
+    Worker
+        name
+        email
+        phone

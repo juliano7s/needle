@@ -3,16 +3,16 @@ package com.creationguts.needle.model;
 import java.util.Date;
 
 /**
- * Class to represent an order made by a client
+ * Class to represent an request made by a client
  * Created by Juliano on 10/1/16.
  */
-public class Order extends BaseVO {
+public class Request extends BaseVO {
 
-    public Order() {
+    public Request() {
         this(0);
     }
 
-    public Order(long id) {
+    public Request(long id) {
         super(id);
     }
 
@@ -32,11 +32,11 @@ public class Order extends BaseVO {
         this.worker = worker;
     }
 
-    public OrderStatus getStatus() {
+    public RequestStatus getStatus() {
         return status;
     }
 
-    public void setStatus(OrderStatus status) {
+    public void setStatus(RequestStatus status) {
         this.status = status;
     }
 
@@ -74,7 +74,7 @@ public class Order extends BaseVO {
 
     private Client client;
     private Worker worker;
-    private OrderStatus status;
+    private RequestStatus status;
     private Date addedDate;
     private Date scheduledDeliveryDate;
     private Date deliveryDate;

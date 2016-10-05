@@ -2,10 +2,7 @@ package com.creationguts.needle.dao.mysql;
 
 import com.creationguts.needle.dao.ClientDao;
 import com.creationguts.needle.dao.DaoFactory;
-import com.creationguts.needle.dao.TestDbCreateDao;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
+import com.creationguts.needle.dao.DbCreateDao;
 
 /**
  * Dao Factory for MySql dao implementations
@@ -35,8 +32,11 @@ public class MySqlDaoFactory extends DaoFactory{
     }
 
     @Override
-    public TestDbCreateDao createTestDbCreateDao() throws Exception {
-        return new MySqlTestDbCreateDao(connectionUrl);
+    public DbCreateDao createDbCreateDao(
+            String[][] clientData,
+            Object[][] requestData,
+            String[][] workerData) throws Exception {
+        return new MySqlDbCreateDao(connectionUrl, clientData, requestData, workerData);
     }
 
     private static String getJdbcUrl(DB db) {

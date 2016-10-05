@@ -18,6 +18,9 @@ public abstract class DaoFactory {
 
     public abstract ClientDao createClientDao() throws Exception;
 
-    public abstract TestDbCreateDao createTestDbCreateDao() throws Exception;
+    public abstract DbCreateDao createDbCreateDao(
+            String[][] clientData,
+            Object[][] requestData,
+            String[][] workerData) throws Exception;
 
 }
